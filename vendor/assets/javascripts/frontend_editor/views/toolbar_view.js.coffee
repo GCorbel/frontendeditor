@@ -11,7 +11,12 @@ class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
 
   render: ->
     super
-    $(@el).html(@template())
+    if $('#frontend_toolbar').length != 0
+      console.log $('#frontend_toolbar').html()
+      $(@el).html($('#frontend_toolbar').html())
+    else
+      $(@el).html(@template())
+
     @$('.save').hide()
     @$('.cancel').hide()
     @

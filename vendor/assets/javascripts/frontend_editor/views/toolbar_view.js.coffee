@@ -26,6 +26,7 @@ class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
     FrontendEditor.currentModels.save()
     FrontendEditor.currentModels.reset()
     alert "Enregistrement Effectué"
+    @toggle_editing_mode()
 
 # reload the page to cancel all change
   cancel_changes: (event) ->

@@ -23,10 +23,8 @@ class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
 # commit all changes for all stored model
   save_changes: (event) ->
     Editor.commitAll()
-    $.each(FrontendEditor.currentModels, (key, model) ->
-      model.save()
-    )
-    FrontendEditor.currentModels = {}
+    FrontendEditor.currentModels.save()
+    FrontendEditor.currentModels.reset()
 
 # reload the page to cancel all change
   cancel_changes: (event) ->

@@ -7,6 +7,7 @@
 //= require_tree ./templates/
 //= require_tree .//models
 //= require_tree .//views
+//= require_tree .//collections
 
 window.FrontendEditor =
   Models: {}
@@ -21,7 +22,7 @@ window.FrontendEditor =
     #Add the view at the top of the body
     $('body').prepend(view.render().el)
     #Init all the models as an empty list
-    @currentModels = {}
+    @currentModels = new FrontendEditor.Collections.InlineEditor.Items()
 
   #Find or add a model to the current list
   getCurrentModel: (modelName) ->
@@ -32,6 +33,6 @@ window.FrontendEditor =
       #Create a new own
       currentModel = new @Models.Item(modelName)
       #Add It to the list
-      @currentModels[modelName] = currentModel
+      @currentModels.add(currentModel)
     #Return the model
     currentModel

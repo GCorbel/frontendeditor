@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{This editor is integrable to any rails application}
   gem.homepage      = "https://github.com/GCorbel/frontendeditor"
 
-  gem.files         = Dir["lib/**/*"] + Dir["vendor/**/*"] + ["Rakefile", "README.md"]
+  gem.files         = DDir["app/**/*"] + Dir["lib/**/*"] + Dir["vendor/**/*"] + ["Rakefile", "README.md"]
   gem.require_paths = ["lib"]
 
   gem.add_dependency 'jquery-ui-rails', '>= 2.0.2'

@@ -15,6 +15,6 @@ Gem::Specification.new do |gem|
   gem.files         = Dir["app/**/*"] + Dir["lib/**/*"] + Dir["vendor/**/*"] + ["Rakefile", "README.md"]
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'jquery-ui-rails', '>= 2.0.2'
+  gem.add_dependency 'jquery-ui-rails', '~> 3.0.1'
   gem.add_dependency 'backbone-on-rails', '>= 0.9.2.1'
 end

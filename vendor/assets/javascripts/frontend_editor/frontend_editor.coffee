@@ -2,7 +2,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
-//= require jquery.effects.highlight
+//= require jquery.ui.effect-highlight.js
 //= require_self
 //= require_tree ./templates/
 //= require_tree .//models

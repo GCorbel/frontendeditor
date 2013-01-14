@@ -1,6 +1,6 @@
 # Frontendeditor
 
-TODO: Write a gem description
+This is a front end editor for rails applications. It must be used with frontendeditor_ckeditor.
 
 ## Installation
 
@@ -15,10 +15,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install frontendeditor
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Contributing
 

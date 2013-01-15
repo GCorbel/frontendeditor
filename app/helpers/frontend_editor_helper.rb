@@ -13,7 +13,7 @@ module FrontendEditorHelper
         attribute: options[:method]
       } ) do
 
-      raw(options[:content])
+      raw(yield)
     end
   end
 end

@@ -3,7 +3,6 @@ module FrontendEditorHelper
     options[:id] ||= model.id
     options[:method] ||= 'body'
     options[:object] ||= model.class.name.demodulize.pluralize.downcase
-    options[:content] ||= model.send(options[:method])
 
     content_tag(:div,
       class: 'editable-long-text',

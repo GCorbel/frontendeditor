@@ -5,22 +5,22 @@
 
     Editor.active = function() {
       var current, textarea;
-      current = $('.editable-long-text').html();
+      current = this.el().html();
       textarea = $('<textarea/>');
       textarea.html(current);
-      return $('.editable-long-text').html(textarea);
+      return this.el().html(textarea);
     };
 
     Editor.commitAll = function() {
       var id, model;
-      id = $('.editable-long-text').data('id');
+      id = this.el().data('id');
       model = FrontendEditor.getCurrentModel(id);
       model.id = id;
-      return model.set($('.editable-long-text').data('attribute'), $('.editable-long-text textarea').html());
+      return model.set(this.el().data('attribute'), this.el().find('textarea').html());
     };
 
     Editor.deactive = function() {
-      return $('.editable-long-text').html($('.editable-long-text textarea').html());
+      return this.el().html(this.el().find('textarea').html());
     };
 
     Editor.el = function() {

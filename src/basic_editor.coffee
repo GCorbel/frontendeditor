@@ -1,18 +1,18 @@
 class window.Editor
   @active = ->
-    current = $('.editable-long-text').html()
+    current = @el().html()
     textarea = $('<textarea/>')
     textarea.html(current)
-    $('.editable-long-text').html(textarea)
+    @el().html(textarea)
 
   @commitAll = ->
-    id = $('.editable-long-text').data('id')
+    id = @el().data('id')
     model = FrontendEditor.getCurrentModel(id)
     model.id = id
-    model.set($('.editable-long-text').data('attribute'), $('.editable-long-text textarea').html())
+    model.set(@el().data('attribute'), @el().find('textarea').html())
 
   @deactive = ->
-    $('.editable-long-text').html($('.editable-long-text textarea').html())
+    @el().html(@el().find('textarea').html())
 
   @el = ->
     $('.editable-long-text')

@@ -6,9 +6,16 @@ class window.Editor
     @el().html(textarea)
 
   @commitAll = ->
-    model = FrontendEditor.getCurrentModel('pages')
-    model.set('id', @el().data('id'))
-    model.set(@el().data('attribute'), @el().find('textarea').html())
+    objectName = @el().data('object')
+    model = FrontendEditor.findCurrentOrCreateModel(objectName)
+    values = id: @el().data('id')
+    values[@el().data('attribute')] = @el().find('textarea').html()
+
+    attributes =
+      values: values
+      prefix: @el().data('prefix')
+      objectName: objectName
+    model.setAttributes(attributes)
 
   @deactive = ->
     @el().html(@el().find('textarea').html())

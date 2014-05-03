@@ -15,11 +15,11 @@
       $('body').prepend(view.render().el);
       return this.currentModels = new FrontendEditor.Collections.InlineEditor.Items();
     },
-    getCurrentModel: function(modelName) {
+    findCurrentOrCreateModel: function(modelName) {
       var currentModel;
       currentModel = this.currentModels[modelName];
       if (currentModel === void 0) {
-        currentModel = new this.Models.Item(modelName);
+        currentModel = new this.Models.Item();
         this.currentModels.add(currentModel);
       }
       return currentModel;
@@ -33,12 +33,27 @@
       return Item.__super__.constructor.apply(this, arguments);
     }
 
-    Item.prototype.initialize = function(plural) {
-      return this.urlRoot = "/" + plural;
+    Item.prototype.setAttributes = function(attributes) {
+      this.setUrlRoot(attributes);
+      return this.setValues(attributes.values);
     };
 
-    Item.prototype.prefix = function(prefix) {
-      return this.urlRoot = prefix + this.urlRoot;
+    Item.prototype.setValues = function(values) {
+      var key, value, _results;
+      _results = [];
+      for (key in values) {
+        value = values[key];
+        _results.push(this.set(key, value));
+      }
+      return _results;
+    };
+
+    Item.prototype.setUrlRoot = function(attributes) {
+      if (attributes.prefix) {
+        return this.urlRoot = "" + attributes.prefix + "/" + attributes.objectName;
+      } else {
+        return this.urlRoot = "/" + attributes.objectName;
+      }
     };
 
     return Item;
@@ -71,12 +86,7 @@
     };
 
     ToolbarView.prototype.saveChanges = function(event) {
-      var prefix;
       Editor.commitAll();
-      prefix = Editor.el().data('prefix');
-      if (prefix) {
-        FrontendEditor.currentModels.prefix(prefix);
-      }
       FrontendEditor.currentModels.save();
       FrontendEditor.currentModels.reset();
       alert("Enregistrement Effectué");
@@ -117,12 +127,6 @@
     Items.prototype.save = function() {
       return this.each(function(model) {
         return model.save();
-      });
-    };
-
-    Items.prototype.prefix = function(prefix) {
-      return this.each(function(model) {
-        return model.prefix(prefix);
       });
     };
 

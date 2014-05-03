@@ -1,9 +1,15 @@
 #This is a generic class for all the models
 class FrontendEditor.Models.Item extends Backbone.Model
-  #Take the plural name of the model and at it to urlRool
-  #When the save method is called, an ajax request is sent at the controller
-  initialize: (plural) ->
-    @urlRoot = "/#{plural}"
+  setAttributes: (attributes) ->
+    @setUrlRoot(attributes)
+    @setValues(attributes.values)
 
-  prefix: (prefix) ->
-    @urlRoot = prefix + @urlRoot
+  setValues: (values) ->
+    for key,value of values
+      @set(key, value)
+
+  setUrlRoot: (attributes) ->
+    if attributes.prefix
+      @urlRoot = "#{attributes.prefix}/#{attributes.objectName}"
+    else
+      @urlRoot = "/#{attributes.objectName}"

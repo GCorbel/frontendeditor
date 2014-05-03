@@ -19,9 +19,6 @@ class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
 # commit all changes for all stored model
   saveChanges: (event) ->
     Editor.commitAll()
-    prefix = Editor.el().data('prefix')
-    if prefix
-      FrontendEditor.currentModels.prefix(prefix)
     FrontendEditor.currentModels.save()
     FrontendEditor.currentModels.reset()
     alert "Enregistrement Effectué"

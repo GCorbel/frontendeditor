@@ -12,10 +12,19 @@
     };
 
     Editor.commitAll = function() {
-      var model;
-      model = FrontendEditor.getCurrentModel('pages');
-      model.set('id', this.el().data('id'));
-      return model.set(this.el().data('attribute'), this.el().find('textarea').html());
+      var attributes, model, objectName, values;
+      objectName = this.el().data('object');
+      model = FrontendEditor.findCurrentOrCreateModel(objectName);
+      values = {
+        id: this.el().data('id')
+      };
+      values[this.el().data('attribute')] = this.el().find('textarea').html();
+      attributes = {
+        values: values,
+        prefix: this.el().data('prefix'),
+        objectName: objectName
+      };
+      return model.setAttributes(attributes);
     };
 
     Editor.deactive = function() {

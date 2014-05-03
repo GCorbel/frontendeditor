@@ -2,7 +2,7 @@ FrontendEditor.Views.InlineEditor ||= {}
 
 class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
 
-  template: JST['frontend_editor/templates/toolbar_views']
+  template: $('#toolbar-template').html()
 
   events:
     'click .editing-mode': 'toggleEditingMode'
@@ -11,11 +11,7 @@ class FrontendEditor.Views.InlineEditor.ToolbarView extends Backbone.View
 
   render: ->
     super
-    if $('#frontend_toolbar').length != 0
-      $(@el).html($('#frontend_toolbar').html())
-    else
-      $(@el).html(@template())
-
+    $(@el).html($('#frontend_toolbar').html())
     @$('.save').hide()
     @$('.cancel').hide()
     @

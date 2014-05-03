@@ -1,13 +1,8 @@
-//= require jquery
-//= require jquery_ujs
-//= require underscore
-//= require backbone
-//= require jquery.ui.effect-highlight.js
-//= require_self
-//= require_tree ./templates/
-//= require_tree .//models
-//= require_tree .//views
-//= require_tree .//collections
+#= require_self
+#= require_tree ./templates/
+#= require_tree .//models
+#= require_tree .//views
+#= require_tree .//collections
 
 window.FrontendEditor =
   Models: {}

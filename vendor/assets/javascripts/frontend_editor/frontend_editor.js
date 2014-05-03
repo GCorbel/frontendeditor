@@ -4,27 +4,6 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  (_base = FrontendEditor.Collections).InlineEditor || (_base.InlineEditor = {});
-
-  FrontendEditor.Collections.InlineEditor.Items = (function(_super) {
-    __extends(Items, _super);
-
-    function Items() {
-      return Items.__super__.constructor.apply(this, arguments);
-    }
-
-    Items.prototype.model = FrontendEditor.Collections.InlineEditor.Item;
-
-    Items.prototype.save = function() {
-      return this.each(function(model) {
-        return model.save();
-      });
-    };
-
-    return Items;
-
-  })(Backbone.Collection);
-
   window.FrontendEditor = {
     Models: {},
     Collections: {},
@@ -58,11 +37,15 @@
       return this.urlRoot = "/" + plural;
     };
 
+    Item.prototype.prefix = function(prefix) {
+      return this.urlRoot = prefix + this.urlRoot;
+    };
+
     return Item;
 
   })(Backbone.Model);
 
-  (_base1 = FrontendEditor.Views).InlineEditor || (_base1.InlineEditor = {});
+  (_base = FrontendEditor.Views).InlineEditor || (_base.InlineEditor = {});
 
   FrontendEditor.Views.InlineEditor.ToolbarView = (function(_super) {
     __extends(ToolbarView, _super);
@@ -71,7 +54,7 @@
       return ToolbarView.__super__.constructor.apply(this, arguments);
     }
 
-    ToolbarView.prototype.template = JST['frontend_editor/templates/toolbar_views'];
+    ToolbarView.prototype.template = $('#toolbar-template').html();
 
     ToolbarView.prototype.events = {
       'click .editing-mode': 'toggleEditingMode',
@@ -81,18 +64,19 @@
 
     ToolbarView.prototype.render = function() {
       ToolbarView.__super__.render.apply(this, arguments);
-      if ($('#frontend_toolbar').length !== 0) {
-        $(this.el).html($('#frontend_toolbar').html());
-      } else {
-        $(this.el).html(this.template());
-      }
+      $(this.el).html($('#frontend_toolbar').html());
       this.$('.save').hide();
       this.$('.cancel').hide();
       return this;
     };
 
     ToolbarView.prototype.saveChanges = function(event) {
+      var prefix;
       Editor.commitAll();
+      prefix = Editor.el().data('prefix');
+      if (prefix) {
+        FrontendEditor.currentModels.prefix(prefix);
+      }
       FrontendEditor.currentModels.save();
       FrontendEditor.currentModels.reset();
       alert("Enregistrement Effectué");
@@ -118,5 +102,32 @@
     return ToolbarView;
 
   })(Backbone.View);
+
+  (_base1 = FrontendEditor.Collections).InlineEditor || (_base1.InlineEditor = {});
+
+  FrontendEditor.Collections.InlineEditor.Items = (function(_super) {
+    __extends(Items, _super);
+
+    function Items() {
+      return Items.__super__.constructor.apply(this, arguments);
+    }
+
+    Items.prototype.model = FrontendEditor.Collections.InlineEditor.Item;
+
+    Items.prototype.save = function() {
+      return this.each(function(model) {
+        return model.save();
+      });
+    };
+
+    Items.prototype.prefix = function(prefix) {
+      return this.each(function(model) {
+        return model.prefix(prefix);
+      });
+    };
+
+    return Items;
+
+  })(Backbone.Collection);
 
 }).call(this);

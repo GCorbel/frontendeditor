@@ -12,10 +12,9 @@
     };
 
     Editor.commitAll = function() {
-      var id, model;
-      id = this.el().data('id');
-      model = FrontendEditor.getCurrentModel(id);
-      model.id = id;
+      var model;
+      model = FrontendEditor.getCurrentModel('pages');
+      model.set('id', this.el().data('id'));
       return model.set(this.el().data('attribute'), this.el().find('textarea').html());
     };
 

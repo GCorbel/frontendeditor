@@ -6,9 +6,8 @@ class window.Editor
     @el().html(textarea)
 
   @commitAll = ->
-    id = @el().data('id')
-    model = FrontendEditor.getCurrentModel(id)
-    model.id = id
+    model = FrontendEditor.getCurrentModel('pages')
+    model.set('id', @el().data('id'))
     model.set(@el().data('attribute'), @el().find('textarea').html())
 
   @deactive = ->

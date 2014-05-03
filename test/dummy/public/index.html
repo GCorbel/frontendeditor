@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo</title>
+  <meta charset="utf-8" />
+  <script src="jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+  <script src="underscore.js" type="text/javascript" charset="utf-8"></script>
+  <script src="backbone.js" type="text/javascript" charset="utf-8"></script>
+  <script src="basic_editor.js" type="text/javascript" charset="utf-8"></script>
+  <script src="frontend_editor.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/template" id="frontend_toolbar">
+    <footer>
+      <a class="editing-mode">Mode edition</a>
+      <a class="save">Sauvegarder</a>
+      <a class="cancel">Annuler</a>
+    </footer>
+  </script>
+</head>
+<body>
+  <div class="editable-long-text" data-attribute="body" data-id="1" data-object="pages">
+    test
+  </div>
+  <script type="text/javascript" charset="utf-8">
+    FrontendEditor.init();
+  </script>
+</body>
+</html>

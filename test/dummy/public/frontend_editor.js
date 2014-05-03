@@ -37,6 +37,10 @@
       return this.urlRoot = "/" + plural;
     };
 
+    Item.prototype.prefix = function(prefix) {
+      return this.urlRoot = prefix + this.urlRoot;
+    };
+
     return Item;
 
   })(Backbone.Model);
@@ -67,7 +71,12 @@
     };
 
     ToolbarView.prototype.saveChanges = function(event) {
+      var prefix;
       Editor.commitAll();
+      prefix = Editor.el().data('prefix');
+      if (prefix) {
+        FrontendEditor.currentModels.prefix(prefix);
+      }
       FrontendEditor.currentModels.save();
       FrontendEditor.currentModels.reset();
       alert("Enregistrement Effectué");
@@ -108,6 +117,12 @@
     Items.prototype.save = function() {
       return this.each(function(model) {
         return model.save();
+      });
+    };
+
+    Items.prototype.prefix = function(prefix) {
+      return this.each(function(model) {
+        return model.prefix(prefix);
       });
     };
 

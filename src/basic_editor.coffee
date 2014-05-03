@@ -13,3 +13,6 @@ class window.Editor
 
   @deactive = ->
     $('.editable-long-text').html($('.editable-long-text textarea').html())
+
+  @el = ->
+    $('.editable-long-text')

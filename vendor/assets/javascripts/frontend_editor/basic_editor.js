@@ -23,6 +23,10 @@
       return $('.editable-long-text').html($('.editable-long-text textarea').html());
     };
 
+    Editor.el = function() {
+      return $('.editable-long-text');
+    };
+
     return Editor;
 
   })();

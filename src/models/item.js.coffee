@@ -4,3 +4,6 @@ class FrontendEditor.Models.Item extends Backbone.Model
   #When the save method is called, an ajax request is sent at the controller
   initialize: (plural) ->
     @urlRoot = "/#{plural}"
+
+  prefix: (prefix) ->
+    @urlRoot = prefix + @urlRoot

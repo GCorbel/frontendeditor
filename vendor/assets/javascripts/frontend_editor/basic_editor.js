@@ -28,7 +28,7 @@
     };
 
     Editor.deactive = function() {
-      return this.el().html(this.el().find('textarea').html());
+      return this.el().html(this.el().find('textarea').val());
     };
 
     Editor.el = function() {

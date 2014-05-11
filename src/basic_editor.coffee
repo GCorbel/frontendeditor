@@ -18,7 +18,7 @@ class window.Editor
     model.setAttributes(attributes)
 
   @deactive = ->
-    @el().html(@el().find('textarea').html())
+    @el().html(@el().find('textarea').val())
 
   @el = ->
     $('.editable-long-text')

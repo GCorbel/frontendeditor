@@ -18,7 +18,7 @@
       values = {
         id: this.el().data('id')
       };
-      values[this.el().data('attribute')] = this.el().find('textarea').html();
+      values[this.el().data('attribute')] = this.el().find('textarea').val();
       attributes = {
         values: values,
         prefix: this.el().data('prefix'),

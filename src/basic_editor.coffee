@@ -9,7 +9,7 @@ class window.Editor
     objectName = @el().data('object')
     model = FrontendEditor.findCurrentOrCreateModel(objectName)
     values = id: @el().data('id')
-    values[@el().data('attribute')] = @el().find('textarea').html()
+    values[@el().data('attribute')] = @el().find('textarea').val()
 
     attributes =
       values: values

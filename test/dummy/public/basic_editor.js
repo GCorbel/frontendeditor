@@ -15,19 +15,24 @@
     };
 
     Editor.commitAll = function() {
-      var attributes, model, objectName, values;
-      objectName = this.el().data('object');
-      model = FrontendEditor.findCurrentOrCreateModel(objectName);
-      values = {
-        id: this.el().data('id')
-      };
-      values[this.el().data('attribute')] = this.el().find('textarea').val();
-      attributes = {
-        values: values,
-        prefix: this.el().data('prefix'),
-        objectName: objectName
-      };
-      return model.setAttributes(attributes);
+      return $.each(this.el(), function() {
+        var attributes, element, id, model, objectName, values;
+        element = $(this);
+        objectName = element.data('object');
+        id = element.data('id');
+        model = FrontendEditor.findCurrentOrCreateModel(objectName, id);
+        values = {
+          id: id,
+          objectName: objectName
+        };
+        values[element.data('attribute')] = element.find('textarea').val();
+        attributes = {
+          values: values,
+          prefix: element.data('prefix'),
+          objectName: objectName
+        };
+        return model.setAttributes(attributes);
+      });
     };
 
     Editor.deactive = function() {

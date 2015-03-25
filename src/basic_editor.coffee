@@ -8,16 +8,22 @@ class window.Editor
       element.html(textarea)
 
   @commitAll = ->
-    objectName = @el().data('object')
-    model = FrontendEditor.findCurrentOrCreateModel(objectName)
-    values = id: @el().data('id')
-    values[@el().data('attribute')] = @el().find('textarea').val()
+    $.each @el(), ->
+      element = $(this)
+      objectName = element.data('object')
+      id = element.data('id')
+      model = FrontendEditor.findCurrentOrCreateModel(objectName, id)
 
-    attributes =
-      values: values
-      prefix: @el().data('prefix')
-      objectName: objectName
-    model.setAttributes(attributes)
+      values =
+        id: id
+        objectName: objectName
+      values[element.data('attribute')] = element.find('textarea').val()
+
+      attributes =
+        values: values
+        prefix: element.data('prefix')
+        objectName: objectName
+      model.setAttributes(attributes)
 
   @deactive = ->
     $.each @el(), ->

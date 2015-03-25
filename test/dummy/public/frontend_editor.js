@@ -15,9 +15,12 @@
       $('body').prepend(view.render().el);
       return this.currentModels = new FrontendEditor.Collections.InlineEditor.Items();
     },
-    findCurrentOrCreateModel: function(modelName) {
+    findCurrentOrCreateModel: function(objectName, id) {
       var currentModel;
-      currentModel = this.currentModels[modelName];
+      currentModel = this.currentModels.findWhere({
+        objectName: objectName,
+        id: id
+      });
       if (currentModel === void 0) {
         currentModel = new this.Models.Item();
         this.currentModels.add(currentModel);

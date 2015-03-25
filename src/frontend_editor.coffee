@@ -20,9 +20,12 @@ window.FrontendEditor =
     @currentModels = new FrontendEditor.Collections.InlineEditor.Items()
 
   #Find or add a model to the current list
-  findCurrentOrCreateModel: (modelName) ->
+  findCurrentOrCreateModel: (objectName, id) ->
     #Find the model
-    currentModel = @currentModels[modelName]
+    currentModel = @currentModels.findWhere
+      objectName: objectName
+      id: id
+
     #If the model is not found
     if currentModel == undefined
       #Create a new own

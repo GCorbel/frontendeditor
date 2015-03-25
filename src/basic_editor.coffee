@@ -1,9 +1,11 @@
 class window.Editor
   @active = ->
-    current = @el().html()
-    textarea = $('<textarea/>')
-    textarea.html(current)
-    @el().html(textarea)
+    $.each @el(), ->
+      element = $(this)
+      current = element.html()
+      textarea = $('<textarea/>')
+      textarea.html(current)
+      element.html(textarea)
 
   @commitAll = ->
     objectName = @el().data('object')
@@ -18,7 +20,9 @@ class window.Editor
     model.setAttributes(attributes)
 
   @deactive = ->
-    @el().html(@el().find('textarea').val())
+    $.each @el(), ->
+      element = $(this)
+      element.html(element.find('textarea').val())
 
   @el = ->
     $('.editable-long-text')
